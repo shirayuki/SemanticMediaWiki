@@ -86,7 +86,7 @@ class OutputPageParserOutput implements HookListener {
 			$title->exists() &&
 			$this->indicatorRegistry !== null &&
 			$this->indicatorRegistry->hasIndicator( $title, $options ) ) {
-			$this->indicatorRegistry->attachIndicators( $outputPage );
+			//$this->indicatorRegistry->attachIndicators( $outputPage );
 		}
 
 		$this->addFactbox( $outputPage, $parserOutput );
