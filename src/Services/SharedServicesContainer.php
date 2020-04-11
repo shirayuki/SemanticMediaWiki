@@ -288,7 +288,17 @@ class SharedServicesContainer implements CallbackContainer {
 
 		$containerBuilder->registerCallback( 'ContentParser', function( $containerBuilder, \Title $title ) {
 			$containerBuilder->registerExpectedReturnType( 'ContentParser', '\SMW\ContentParser' );
-			return new ContentParser( $title );
+
+			$contentParser = new ContentParser(
+				$title,
+				$containerBuilder->create( 'Parser' )
+			);
+
+			$contentParser->setRevisionGuard(
+				$containerBuilder->singleton( 'RevisionGuard' )
+			);
+
+			return $contentParser;
 		} );
 
 		$containerBuilder->registerCallback( 'DeferredCallableUpdate', function( $containerBuilder, callable $callback = null ) {
